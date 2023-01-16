@@ -5,16 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/13 02:08:05 by rkedida           #+#    #+#              #
-#    Updated: 2023/01/15 13:09:34 by rkedida          ###   ########.fr        #
+#    Created: 2023/01/15 13:15:50 by rkedida           #+#    #+#              #
+#    Updated: 2023/01/15 13:17:47 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= violence
+NAME			= losers
 
-SRC				= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
-
-HEADERS			= Weapon.hpp HumanA.hpp HumanB.hpp
+SRC				= main.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 

@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 02:10:09 by rkedida           #+#    #+#             */
-/*   Updated: 2023/01/13 08:53:13 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:10:35 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@
 # include "HumanA.hpp"
 # include "HumanB.hpp"
 
+class HumanA;
+class HumanB;
+
 class Weapon
 {
 	private:
 		std::string _type;
 
 	public:
-//		Constructor and destructor
-		Weapon(std::string& type);
+
+		Weapon(std::string type);
 		~Weapon();
 
-//		member functions get and set
+		void setType(std::string type);
 		const std::string& getType();
-		void setType(std::string& type);
 };
 
 #endif

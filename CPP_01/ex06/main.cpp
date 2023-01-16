@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 07:36:45 by rkedida           #+#    #+#             */
-/*   Updated: 2023/01/15 12:52:58 by rkedida          ###   ########.fr       */
+/*   Created: 2023/01/15 15:35:11 by rkedida           #+#    #+#             */
+/*   Updated: 2023/01/15 17:17:36 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#include "Harl.hpp"
 
-HumanB::HumanB(std::string name) : _name(name)
+int main(int ac, char **av)
 {
-}
-
-HumanB::~HumanB()
-{
-}
-
-void HumanB::attack()
-{
-	std::cout << _name << " attacks with their " << _weapon->getType() << std::endl;
-}
-
-void HumanB::setWeapon(Weapon &weapon)
-{
-	_weapon = &weapon;
-}
-
-std::string HumanB::getWeapon()
-{
-	return (_weapon->getType());
+	Harl mssg;
+	
+	if (ac != 2)
+	{
+		std::cout << "Usage: ./Harl [Debug, Info, Warning, Error]" << std::endl;
+		return (1);
+	}
+	mssg.complain(av[1]);
+	return (0);
 }

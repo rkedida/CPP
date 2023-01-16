@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/13 02:08:05 by rkedida           #+#    #+#              #
-#    Updated: 2023/01/15 13:09:34 by rkedida          ###   ########.fr        #
+#    Created: 2023/01/15 15:34:06 by rkedida           #+#    #+#              #
+#    Updated: 2023/01/15 16:36:14 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= violence
+NAME			= harlFilter
 
-SRC				= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC				= main.cpp Harl.cpp
 
-HEADERS			= Weapon.hpp HumanA.hpp HumanB.hpp
+HEADERS			= Harl.hpp
 
 OBJ				= $(SRC:.cpp=.o)
 

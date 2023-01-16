@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 07:15:09 by rkedida           #+#    #+#             */
-/*   Updated: 2023/01/13 08:20:03 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/01/15 13:08:07 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "Weapon.hpp"
 # include "HumanA.hpp"
 
+class Weapon;
+
 class HumanB
 {
 	private:
@@ -25,13 +27,13 @@ class HumanB
 		Weapon* _weapon;
 
 	public:
-//		Constructor and destructor
+
 		HumanB(std::string name);
 		~HumanB();
 
-//		member functions get and set
 		void attack();
-		void setWeapon(Weapon& weapon);
+		void setWeapon(Weapon &_weapon);
+		std::string getWeapon();
 };
 
 #endif
