@@ -5,22 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 00:40:51 by rkedida           #+#    #+#             */
-/*   Updated: 2023/01/13 01:37:42 by rkedida          ###   ########.fr       */
+/*   Created: 2023/01/18 17:36:01 by rkedida           #+#    #+#             */
+/*   Updated: 2023/01/19 14:58:08 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Fixed.hpp"
 
-int main(void)
+int main( void ) 
 {
-	Zombie *Zombie;
-	
-	Zombie = zombieHorde(5, "Robel");
-
-	for(int i = 0; i < 5; i++)
-		Zombie[i].announce();
-	delete [] Zombie;
-
-	return (0);
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return 0;
 }
