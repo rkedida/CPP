@@ -5,27 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:36:01 by rkedida           #+#    #+#             */
-/*   Updated: 2023/01/22 12:19:48 by rkedida          ###   ########.fr       */
+/*   Created: 2023/01/22 18:36:53 by rkedida           #+#    #+#             */
+/*   Updated: 2023/02/02 09:28:50 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "Point.hpp"
 
-int main( void )
+int main()
 {
-	Fixed a;
-	Fixed const b( -10 );
-	Fixed const c( -42.42f );
-	Fixed const d( b );
-	a = Fixed( -1234.4321f );
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	Point A(0.0f,0.0f);
+	Point B(-2.0f, 0.0f);
+	Point C(0.0f, 2.0f);
+
+	Point P(0.0f, 2.0f);
+	
+	if (bsp(A, B, C, P))
+		std::cout << "Point P lies in the triangle ABC" << std::endl;
+	else
+		std::cout << "Point P does not lie in the triangle ABC" << std::endl;
 	return 0;
 }

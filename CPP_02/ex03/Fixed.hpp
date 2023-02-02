@@ -5,16 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 17:36:01 by rkedida           #+#    #+#             */
-/*   Updated: 2023/01/22 11:31:09 by rkedida          ###   ########.fr       */
+/*   Created: 2023/01/22 18:28:48 by rkedida           #+#    #+#             */
+/*   Updated: 2023/02/01 13:54:08 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
-#define FIXED_HPP
+# define FIXED_HPP
 
-#include <iostream>
-#include <cmath>
+# include <iostream>
+# include <string>
+# include <cmath>
 
 class Fixed
 {
@@ -30,11 +31,34 @@ class Fixed
 		Fixed &operator=(const Fixed &obj);
 		~Fixed();
 
+		bool operator>(const Fixed &obj);
+		bool operator<(const Fixed &obj);
+		bool operator>=(const Fixed &obj);
+		bool operator<=(const Fixed &obj);
+		bool operator==(const Fixed &obj);
+		bool operator!=(const Fixed &obj);
+
+		Fixed operator+(const Fixed &obj) const;
+		Fixed operator-(const Fixed &obj) const;
+		Fixed operator*(const Fixed &obj) const;
+		Fixed operator/(const Fixed &obj) const;
+
+		Fixed &operator++();
+		Fixed operator++(int);
+		Fixed &operator--();
+		Fixed operator--(int);
+
+		static Fixed &min(Fixed &fixedPoint1, Fixed &fixedPoint2);
+		static const Fixed &min(const Fixed &fixedPoint1, const Fixed &fixedPoint2);
+		static Fixed &max(Fixed &fixedPoint1, Fixed &fixedPoint2);
+		static const Fixed &max(const Fixed &fixedPoint1, const Fixed &fixedPoint2);
+
 		friend std::ostream &operator<<(std::ostream& COUT, const Fixed& obj);
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
 		float toFloat(void) const;
 		int toInt(void) const;
+
 };
 
 #endif
