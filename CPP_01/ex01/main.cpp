@@ -5,24 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 18:36:53 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/02 11:51:31 by rkedida          ###   ########.fr       */
+/*   Created: 2023/01/13 00:40:51 by rkedida           #+#    #+#             */
+/*   Updated: 2023/01/21 12:41:53 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Point.hpp"
+#include "Zombie.hpp"
 
-int main()
+int main(void)
 {
-	Point A(0.0f,0.0f);
-	Point B(-2.0f, 0.0f);
-	Point C(0.0f, 2.0f);
-
-	Point P(1.0f, 0.5f);
+	Zombie *Zombie;
 	
-	if (bsp(A, B, C, P))
-		std::cout << "Point P lies in the triangle ABC" << std::endl;
-	else
-		std::cout << "Point P does not lie in the triangle ABC" << std::endl;
-	return 0;
+	Zombie = zombieHorde(5, "Robel");
+
+	for(int i = 0; i < 5; i++)
+		Zombie[i].announce();
+	delete [] Zombie;
+
+	return (0);
 }

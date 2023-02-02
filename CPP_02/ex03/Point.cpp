@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 18:32:45 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/02 09:26:51 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:49:42 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ Point::Point(float const x, float const y) : _x(x), _y(y)
 
 Point& Point::operator=(Point const &obj)
 {
-	(void)obj;	return *this;
+	(void)obj;
+	return *this;
 }
 
 Point::~Point()
