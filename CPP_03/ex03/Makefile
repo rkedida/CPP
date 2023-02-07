@@ -1,0 +1,40 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/03 11:36:51 by rkedida           #+#    #+#              #
+#    Updated: 2023/02/07 13:39:36 by rkedida          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME		= DiamondTrap
+
+SRC			= main.cpp ClapTrap.cpp FragTrap.cpp ScavTrap.cpp DiamondTrap.cpp
+
+HEADERS		= ClapTrap.hpp FragTrap.hpp ScavTrap.hpp DiamondTrap.hpp
+
+OBJ			= $(SRC:.cpp=.o)
+
+CC			= c++
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
+
+all: $(NAME)
+
+%.o: %.cpp
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+
+clean:
+	-@$(RM) $(OBJ)
+
+fclean: clean
+	-@$(RM) $(NAME)
+
+re: clean all
+
+.PHONY: re, fclean, clean, all
