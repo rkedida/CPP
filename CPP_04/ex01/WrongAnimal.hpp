@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 13:25:32 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 12:35:16 by rkedida          ###   ########.fr       */
+/*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
+/*   Updated: 2023/02/11 13:50:30 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
-# include "Animal.hpp"
+# include <iostream>
 
-class Dog : virtual public Animal
+class WrongAnimal
 {
 	public:
-		Dog();
-		~Dog();
+		WrongAnimal();
+		virtual ~WrongAnimal();
 
 		void makeSound() const;
 };

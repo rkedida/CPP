@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 13:25:32 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 12:35:16 by rkedida          ###   ########.fr       */
+/*   Created: 2023/02/08 13:26:03 by rkedida           #+#    #+#             */
+/*   Updated: 2023/02/11 19:30:57 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#include "Dog.hpp"
 
-# include "Animal.hpp"
-
-class Dog : virtual public Animal
+Dog::Dog()
 {
-	public:
-		Dog();
-		~Dog();
+	std::cout << "Dog Default Constuctor Called." << std::endl;
+	this->type = "Dog";
+	this->brain = new Brain();
+}
 
-		void makeSound() const;
-};
+Dog::~Dog()
+{
+	std::cout << "Dog Destructor Called." << std::endl;
+	delete this->brain;
+}
 
-#endif
+void Dog::makeSound() const
+{
+	std::cout << "This Animal " << this->type << " makes: wuff wuff..." << std::endl;
+}

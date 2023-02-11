@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 13:25:32 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 12:35:16 by rkedida          ###   ########.fr       */
+/*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
+/*   Updated: 2023/02/11 14:00:12 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
-class Dog : virtual public Animal
+class WrongCat : virtual public WrongAnimal
 {
 	public:
-		Dog();
-		~Dog();
-
+		WrongCat();
+		~WrongCat();
+		
 		void makeSound() const;
 };
 
