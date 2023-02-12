@@ -5,36 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/13 02:08:05 by rkedida           #+#    #+#              #
-#    Updated: 2023/02/12 17:59:18 by rkedida          ###   ########.fr        #
+#    Created: 2023/02/08 10:13:35 by rkedida           #+#    #+#              #
+#    Updated: 2023/02/12 17:49:49 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= violence
+NAME		= WorldOnFire
 
-SRC				= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC			= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 
-HEADERS			= Weapon.hpp HumanA.hpp HumanB.hpp
+HEADERS		= Animal.hpp Cat.hpp Dog.hpp Brain.hpp
 
-OBJ				= $(SRC:.cpp=.o)
+OBJ			= $(SRC:.cpp=.o)
 
-CC				= c++
-
-CFLAGS			= -Wall -Wextra -Werror -std=c++98
+CC			= c++
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(HEADERS)
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+	-@$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	-@$(RM) $(NAME)
 
 re: clean all
 

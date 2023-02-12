@@ -6,19 +6,18 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 19:41:25 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:08:57 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BRAIN_HPP
 # define BRAIN_HPP
 
-# include <iostream>
-# include <string>
+# include "Animal.hpp"
 
 class Brain
 {
-	protected:
+	private:
 		std::string* ideas;
 
 	public:

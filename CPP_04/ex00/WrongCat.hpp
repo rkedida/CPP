@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 13:51:36 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/12 16:04:18 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ class WrongCat : public WrongAnimal
 {
 	public:
 		WrongCat();
+		WrongCat(const WrongCat& src);
 		~WrongCat();
-		
+
+		WrongCat& operator=(const WrongCat& src);
+
 		void makeSound() const;
 };
 

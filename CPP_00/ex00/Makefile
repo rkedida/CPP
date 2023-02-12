@@ -6,7 +6,7 @@
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/31 15:17:41 by rkedida           #+#    #+#              #
-#    Updated: 2023/01/08 14:48:09 by rkedida          ###   ########.fr        #
+#    Updated: 2023/02/12 18:00:50 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ all: $(NAME)
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADERS)
 	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
 clean:

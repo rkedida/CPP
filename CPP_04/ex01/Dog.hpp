@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:25:32 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 16:35:13 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:08:08 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 # define DOG_HPP
 
 # include "Animal.hpp"
-# include "Brain.hpp"
 
 class Dog : virtual public Animal
 {
+	private:
+		Brain* brain;
+
 	public:
 		Dog();
+		Dog(const Dog& src);
 		~Dog();
+
+		Dog& operator=(const Dog& src);
 
 		void makeSound() const;
 };

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.hpp                                       :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 14:00:12 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/12 15:08:57 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGCAT_HPP
-# define WRONGCAT_HPP
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
-# include "WrongAnimal.hpp"
+# include "Animal.hpp"
 
-class WrongCat : virtual public WrongAnimal
+class Brain
 {
+	private:
+		std::string* ideas;
+
 	public:
-		WrongCat();
-		~WrongCat();
-		
-		void makeSound() const;
+		Brain();
+		Brain(const Brain& src);
+		~Brain();
+
+		Brain& operator=(const Brain& src);
 };
 
 #endif

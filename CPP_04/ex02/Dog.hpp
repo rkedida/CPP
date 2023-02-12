@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/11 13:38:14 by rkedida          ###   ########.fr       */
+/*   Created: 2023/02/08 13:25:32 by rkedida           #+#    #+#             */
+/*   Updated: 2023/02/12 17:50:34 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "WrongCat.hpp"
+#ifndef DOG_HPP
+# define DOG_HPP
 
-WrongCat::WrongCat()
-{
-	std::cout << "WrongCat Constructor Called." << std::endl;
-}
+# include "Animal.hpp"
 
-WrongCat::~WrongCat()
+class Dog : virtual public Animal
 {
-	std::cout << "WrongCat Destructor Called." << std::endl;
-}
+	private:
+		Brain* brain;
 
-void WrongCat::makeSound() const
-{
-	std::cout << "This WrongCat makes: meow meow ..." << std::endl;
-}
+	public:
+		Dog();
+		Dog(const Dog& src);
+		~Dog();
+
+		Dog& operator=(const Dog& src);
+
+		void makeSound() const;
+};
+
+#endif

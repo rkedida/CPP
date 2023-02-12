@@ -1,39 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.cpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 11:18:10 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/12 14:11:20 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/12 18:44:38 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Brain.hpp"
+# include "Dog.hpp"
+# include "Cat.hpp"
 
-Brain::Brain()
+#define nb 100
+
+void leaks (void)
 {
-	std::cout << "Brain Default Constructor Called." << std::endl;
-	ideas = new std::string [100];
+	system("leaks WorldOnFire");
 }
 
-Brain::Brain(const Brain& src)
+int main()
 {
-	std::cout << "Brain Copy Constructor Called." << std::endl;
-	*this = src;
-}
+	atexit(leaks);
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
 
-Brain::~Brain()
-{
-	std::cout << "Brain Destructor Called." << std::endl;
-	delete [] ideas;
-}
+	delete j;
+	delete i;
 
-Brain &Brain::operator=(const Brain& src)
-{
-	std::cout << "Brain Copy Assignment Operator Called." << std::endl;
-	for (int i = 0; i <= 100; ++i)
-		this->ideas[i] = src.ideas[i];
-	return *this;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+
+	const Animal* arr[nb];
+
+	for (int idx = 0; idx < nb; ++idx)
+	{
+		if (idx % 2 == 0)
+			arr[idx] = new Dog();
+		else
+			arr[idx] = new Cat();
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	for (int idx = 0; idx < nb; ++idx)
+		delete arr[idx];
+
+	return 0;
 }

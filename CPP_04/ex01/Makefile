@@ -6,15 +6,15 @@
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 10:13:35 by rkedida           #+#    #+#              #
-#    Updated: 2023/02/11 14:32:59 by rkedida          ###   ########.fr        #
+#    Updated: 2023/02/12 17:53:22 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= Polymorphism
+NAME		= WorldOnFire
 
-SRC			= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+SRC			= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 
-HEADERS		= Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
+HEADERS		= Animal.hpp Cat.hpp Dog.hpp Brain.hpp
 
 OBJ			= $(SRC:.cpp=.o)
 
@@ -26,7 +26,7 @@ all: $(NAME)
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADERS)
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
 clean:
