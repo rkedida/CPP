@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:55 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/14 10:41:07 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/15 17:26:43 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <iostream>
 # include <string>
 # include <exception>
+# include "AForm.hpp"
+
+class AForm;
 
 class Bureaucrat
 {
@@ -41,6 +44,10 @@ class Bureaucrat
 			public:
 				const char* what() const throw();
 		};
+
+		void executeForm(AForm const & form);
+
+		void signForm(AForm& src) const;
 
 		void incrementGrade();
 		void decrementGrade();

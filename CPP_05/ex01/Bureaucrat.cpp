@@ -6,13 +6,11 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/14 11:33:34 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:05:21 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
-# include <string>
-# include <exception>
+# include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Balu"), _grade(150)
 {
@@ -37,7 +35,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& src): _name(src._name), _grade(src._gra
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat Destructor Called." << this->_name<<std::endl;
+	std::cout << "Bureaucrat Destructor Called." << std::endl;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& src)
@@ -56,6 +54,14 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return "Too LOW!";
 }
+
+// void Bureaucrat::signForm(Form& src) const
+// {
+// 	if (this->_grade <= src.getGradeSign())
+// 		src.beSigned(*this);
+// 	else
+// 		std::cout << "This " << this->_name << " can't Sign " << src.getName() << " because the Grade is too Low!" << std::endl;
+// }
 
 void Bureaucrat::incrementGrade()
 {
