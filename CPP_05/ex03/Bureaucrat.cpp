@@ -6,13 +6,11 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/18 14:43:52 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/18 14:00:58 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
-# include <string>
-# include <exception>
+# include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Balu"), _grade(150)
 {
@@ -57,6 +55,30 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 	return "Too LOW!";
 }
 
+void Bureaucrat::executeForm(AForm const & form)
+{
+	if (form.getSigned() == true)
+	{
+		form.execute(*this);
+		std::cout << "This " << this->_name << " executed the Form." << std::endl;
+	}
+	else
+		std::cout << "Execution not possible because it is not Signed." << std::endl;
+}
+
+void Bureaucrat::signForm(AForm& src) const
+{
+	if (this->_grade <= src.getGradeSign())
+	{
+		if (src.getSigned() == false)
+			src.beSigned(*this);
+		else
+			std::cout << "This " << this->_name << " already Signed the Form." << std::endl;
+	}
+	else
+		std::cout << "This " << this->_name << " can't Sign " << src.getName() << " because the Grade is too Low!" << std::endl;
+}
+
 void Bureaucrat::incrementGrade()
 {
 	if (this->_grade > 1)
@@ -95,6 +117,6 @@ int Bureaucrat::getGrade() const
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& src)
 {
-	out << "This " << src.getName() << " Bureaucrat grade " << src.getGrade() << std::endl;
+	out << src.getName() << " Bureaucrat grade " << src.getGrade() << std::endl;
 	return out;
 }

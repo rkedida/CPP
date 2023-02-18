@@ -6,19 +6,14 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:23:21 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/15 12:44:56 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/18 16:49:21 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORM_HPP
 # define FORM_HPP
 
-// # include <iostream>
-// # include <string>
 # include "Bureaucrat.hpp"
-
-# define HIGH
-# define LOW
 
 class Bureaucrat;
 

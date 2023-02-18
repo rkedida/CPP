@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:23:21 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/15 15:40:20 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/18 16:45:06 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ const char* Form::GradeTooLowException::what() const throw()
 	return "Too LOW!";
 }
 
-void Form::beSigned(const Bureaucrat& src)
+void AForm::beSigned(const Bureaucrat& src)
 {
 	int grade = src.getGrade();
 
@@ -67,6 +67,8 @@ void Form::beSigned(const Bureaucrat& src)
 		throw GradeTooHighException();
 	if (grade > 150)
 		throw GradeTooLowException();
+	if (this->_signed == true)
+		std::cout << "This " << src.getName() << " already Signed the Form." << std::endl;
 	if (grade <= this->_RequiredGradeSign)
 	{
 		this->_signed = true;
@@ -100,17 +102,4 @@ std::ostream& operator<<(std::ostream& out, const Form& src)
 {
 	out << "This " << src.getName() << " Form needs at least a RequiredGradeSign of " << src.getGradeSign() << " and a RequiredGradeExe of " << src.getGradeExe() << "." << std::endl;
 	return out;
-}
-
-void Bureaucrat::signForm(Form& src) const
-{
-	if (this->_grade <= src.getGradeSign())
-	{
-		if (src.getSigned() == false)
-			src.beSigned(*this);
-		else
-			std::cout << "This " << this->_name << " already Signed the Form." << std::endl;
-	}
-	else
-		std::cout << "This " << this->_name << " can't Sign " << src.getName() << " because the Grade is too Low!" << std::endl;
 }
