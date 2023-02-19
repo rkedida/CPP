@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:23:21 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/18 16:45:06 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/19 12:29:54 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ const char* Form::GradeTooLowException::what() const throw()
 	return "Too LOW!";
 }
 
-void AForm::beSigned(const Bureaucrat& src)
+void Form::beSigned(const Bureaucrat& src)
 {
 	int grade = src.getGrade();
 
