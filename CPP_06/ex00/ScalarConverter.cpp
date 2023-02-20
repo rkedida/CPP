@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/19 21:06:47 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:14:18 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,45 +38,37 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& src)
 
 char ScalarConverter::ConvertToChar(const std::string& input)
 {
-	if (input.length() == 1 && !isdigit(input[0]))
+	if (input.size() == 1 && !isdigit(input[0]))
 		return input[0];
-	std::cout << "char: ";
-	if (input.length() == 0 || input.length() > 1)
-	{
-		std::cout << "impossible";
-		return '\0';
-	}
 	if (!myIsprint(input[0]))
-	{
-		std::cout << "Non displayable" << std::endl;
-		return '\0';
-	}
+		throw NonDisplayable();
+	if (input.length() == 0 || input.length() > 1)
+		throw Impossible();
 	return input[0];
 }
 
 
 int ScalarConverter::ConvertToInt(const std::string& input)
 {
-	std::cout << "int: ";
 	try
 	{
-		return std::stoi(input);
+		std::stoi(input);
+		return 1;
 	}
-	catch(const std::out_of_range& e)
+	catch(const std::exception& e)
 	{
-		std::cout << "impossible" << std::endl;
+		std::cout << e.what() << std::endl;
 		return 0;
 	}
 	catch(const std::invalid_argument& e)
 	{
-		std::cout << "impossible" << std::endl;
+		std::cout << e.what() << std::endl;
 		return 0;
 	}
 }
 
 float ScalarConverter::ConvertToFloat(const std::string& input)
 {
-	std::cout << "float: ";
 	try
 	{
 		return std::stof(input);
@@ -100,13 +92,13 @@ float ScalarConverter::ConvertToFloat(const std::string& input)
 
 double ScalarConverter::ConvertToDouble(const std::string& input)
 {
-	std::cout << "double: ";
 	try
 	{
 		return std::stod(input);
 	}
-	catch(const std::out_of_range& e)
+	catch(const std::exception& e)
 	{
+		throw Impossible();
 		std::cout << "impossible" << std::endl;
 		return 0.0;
 	}
@@ -121,7 +113,7 @@ double ScalarConverter::ConvertToDouble(const std::string& input)
 	return 0.0;
 }
 
-Type ScalarConverter::getType(std::string& input)
+Type ScalarConverter::identifyType(std::string& input)
 {
 	if (input.length() == 1 && !isdigit(input[0]))
 		return CHAR;
@@ -149,30 +141,119 @@ Type ScalarConverter::getType(std::string& input)
 		return DOUBLE;
 }
 
+std::string ScalarConverter::getType(std::string& input)
+{
+	Type type;
+	std::string startType;
+
+	type = identifyType(input);
+	for (int idx = 0; idx <= 4; idx++)
+	{
+		if (type == 0)
+			startType = "The identified Type is: INVALID";
+		else if (type == 1)
+			startType = "The identified Type is: CHAR";
+		else if (type == 2)
+			startType = "The identified Type is: INT";
+		else if (type == 3)
+			startType = "The identified Type is: FLOAT";
+		else if (type == 4)
+			startType = "The identified Type is: DOUBLE";
+	}
+	return startType;
+}
+
+int ScalarConverter::myAtoi(std::string& input)
+{
+	int result = 0;
+	int sign = 1;
+	unsigned long i = 0;
+
+	while (i < input.length() && input[i] == ' ')
+		i++;
+
+	if (i < input.length() && (input[i] == '+' || input[i] == '-'))
+	{
+		sign = (input[i] == '-') ? -1 : 1;
+		i++;
+	}
+
+	while (i < input.length())
+	{
+		if(input[i] >= '0' && input[i] <= '9')
+		{
+			if (result > INT_MAX / 10 || (result == INT_MAX / 10 && (input[i] - '0') > INT_MAX % 10))
+				return (sign == -1) ? INT_MIN : INT_MAX;
+
+			result = result * 10 + (input[i] - '0');
+			i++;
+		}
+		else
+			break;
+	}
+	return sign * result;
+}
+
 void ScalarConverter::convert(std::string& input)
 {
 	ScalarConverter converter;
 
-	switch(getType(input))
+	char c;
+	int i;
+	float f;
+	double d;
+	std::string startType;
+
+	startType = getType(input);
+	std::cout << startType << std::endl;
+
+	switch(identifyType(input))
 	{
 		case CHAR:
-			ConvertToChar(input);
-			std::cout << std::endl;
-			break;
+			c = ConvertToChar(input);
+			std::cout << "char: " << c << std::endl;
+			// break;
 		case INT:
-			ConvertToInt(input);
-			std::cout << std::endl;
-			break;
+		
+			if (myAtoi(input))
+				i = ConvertToInt(input);
+			else
+				throw Impossible();
+			if (i == 1)
+				std::cout << "int: " << i << std::endl;
+			else
+				std::cout << "int: Non displayable" << std::endl;
+			// break;
 		case FLOAT:
-			ConvertToFloat(input);
-			std::cout << std::endl;
-			break;
+			if (input == "+inff" || input == "-inff")
+			{
+				if (input == "+inff")
+					std::cout << "float: +inff" << std::endl;
+				else
+					std::cout << "float: -inff" << std::endl;
+			}
+			else
+			{
+				f = ConvertToFloat(input);
+				std::cout << "float: " << f << ".0f" << std::endl;
+			}
+			// break;
 		case DOUBLE:
-			ConvertToDouble(input);
-			std::cout << std::endl;
+		if (input == "+inff" || input == "-inff")
+			{
+				if (input == "+inff")
+					std::cout << "float: +inff" << std::endl;
+				else
+					std::cout << "float: -inff" << std::endl;
+			}
+			else
+			{
+				d = ConvertToDouble(input);
+				std::cout << "double: " << d << ".0" << std::endl;
+			}
 			break;
 		default:
-			std::cout << "impossible" << std::endl;
+			std::cout << "impossible";
 			break;
 	}
 }
@@ -182,4 +263,14 @@ int ScalarConverter::myIsprint(int ch)
 	if (ch >= 32 && ch <= 127)
 		return 1;
 	return 0;
+}
+
+const char* ScalarConverter::Impossible::what() const throw()
+{
+	return "impossible";
+}
+
+const char* ScalarConverter::NonDisplayable::what() const throw()
+{
+	return "Non displayable";
 }
