@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/21 02:13:47 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/21 13:07:49 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class ScalarConverter
 		enum Type type;
 		ScalarConverter& operator=(const ScalarConverter& src);
 
-		static char ConvertToChar(const std::string& input);
+		static char ConvertToChar(std::string& input);
 		static int ConvertToInt( std::string& input);
 		static float ConvertToFloat(const std::string& input);
 		static double ConvertToDouble(const std::string& input);
