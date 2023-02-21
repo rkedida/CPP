@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/20 16:59:31 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/21 02:13:47 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,29 @@ class ScalarConverter
 		ScalarConverter(const ScalarConverter& src);
 		~ScalarConverter();
 
-
+		char c;
+		int	i;
+		float f;
+		double d;
+		Type _type;
 
 	public:
 		enum Type type;
 		ScalarConverter& operator=(const ScalarConverter& src);
 
 		static char ConvertToChar(const std::string& input);
-		static int ConvertToInt(const std::string& input);
+		static int ConvertToInt( std::string& input);
 		static float ConvertToFloat(const std::string& input);
 		static double ConvertToDouble(const std::string& input);
 
 		
 		static Type identifyType(std::string& input);
-		static std::string getType(std::string& input);
+		static std::string getType(std::string& input, ScalarConverter& converter);
 		static int myAtoi(std::string& input);
 		static void convert(std::string& input);
 
 		static int myIsprint(int ch);
+		static double myIsprintD(double ch);
 
 		class Impossible : public std::exception
 		{
@@ -58,6 +63,18 @@ class ScalarConverter
 		{
 			const char* what() const throw();
 		};
+
+		void setChar(char c);
+		void setInt(int i);
+		void setFloat(float f);
+		void setDouble(double d);
+		void setType(Type& type);
+
+		char getChar() const;
+		int getInt() const;
+		float getFloat() const;
+		double getDouble() const;
+		Type getTypo();
 };
 
 #endif

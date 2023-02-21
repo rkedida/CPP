@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/20 12:29:25 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/21 00:05:08 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ int main(int ac, char **av)
 		return 1;
 	}
 	input = av[1];
+	// if (input.size() > 1)
+	// {
+	// 	for(int i = 0; i  < input.size(); i++)
+	// 	{
+	// 		if (isalpha(input[i]))
+	// 			return 0;
+	// 	}
+	// }
 	ScalarConverter::convert(input);
 	return 0;
 }
