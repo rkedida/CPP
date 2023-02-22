@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/21 17:40:17 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/21 22:49:53 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,21 @@ char ScalarConverter::ConvertToChar(std::string& input)
 	// int i = 0;
 	// char c = '\0';
 
+	// while (i < input.length())
+	// {
+	// 	if (input[i] = )
+	// }
 
+	if (input.length() == 0 || input.length() > 1)
+		return '\0';
 	if (input.size() == 1 && isdigit(input[0]))
-			return '\0';
+			return input[0];
 	if (input.size() == 1 && !isdigit(input[0]))
 	{
 		return input[0];
 	}
 	if (myIsprintD(input[0]) && input[0] != '.')
 		return input[0];
-	if (input.length() == 0 || input.length() > 1)
-		return '\0';
 	return input[0];
 }
 
@@ -59,7 +63,6 @@ char ScalarConverter::ConvertToChar(std::string& input)
 int ScalarConverter::ConvertToInt(std::string& input)
 {
 	int d = myAtoi(input);
-
 
 	if (d == -1)
 		return -1;
@@ -122,7 +125,10 @@ double ScalarConverter::ConvertToDouble(const std::string& input)
 		else if (c == '.' && !hasDot)
 			hasDot = true;
 		else if (c == 'f' && i == input.size() - 1)
+		{
+				
 			return static_cast<float>(d);
+		}
 		else
 			return -1;
 	}
@@ -187,64 +193,6 @@ Type ScalarConverter::identifyType(std::string& input)
 		return INVALID;
 	return INVALID;
 }
-
-// Type ScalarConverter::identifyType(std::string& input)
-// {
-// 	if (input.length() == 1 && isalpha(input[0]) && myIsprint(input[0]) == 1 && !isdigit(input[0]))
-// 		return CHAR;
-	
-
-// 	bool is_int = true;
-// 	bool is_float = false;
-// 	bool is_double = false;
-// 	bool is_invalid = false;
-// 	char c;
-
-// 	for(int i = 0; i < static_cast<int>(input.size()); i++)
-// 	{
-// 		c = input[i];
-// 		if (isalpha(c))
-// 		{
-// 				is_int = false;
-// 				is_invalid = true;
-// 				return INVALID;
-// 		}
-// 	}
-
-// 	for (int i = 0; i < static_cast<int>(input.size()); i++)
-// 	{
-// 		char c = input[i];
-// 		if (c == '.' && !is_float && !is_double && !is_invalid)
-// 		{
-// 			if (input.back() == 'f')
-// 			{
-// 				is_int = false;
-// 				is_float = true;
-// 			}
-// 			else if (input.back() != 'f' && isalpha(c))
-// 			{
-// 				is_int = false;
-// 				is_float = false;
-// 				is_invalid = true;
-// 				return INVALID;
-// 			}
-// 			else if (c == '.' && input.back() == isdigit(c))
-// 			{
-// 				is_int = false;
-// 				is_double = true;
-// 			}
-// 		}
-// 	}
-
-// 	if (is_int)
-// 		return INT;
-// 	else if (is_float)
-// 		return FLOAT;
-// 	else if (is_double)
-// 		return DOUBLE;
-// 	return INVALID;
-// }
-
 
 std::string ScalarConverter::getType(std::string& input, ScalarConverter& converter)
 {
@@ -314,20 +262,21 @@ void ScalarConverter::convert(std::string& input)
 
 	char c = converter.ConvertToChar(input);
 	converter.setChar(c);
-	if (c == '\0')
-		std::cout << "char: impossible\n";
+
+	if (isdigit(c))
+		std::cout << "char: Non displayable" << std::endl;
+	else if (c == '\0')
+		std::cout << "char: impossible" << std::endl;
 	else
 		std::cout << "char: '" << c << "'" << std::endl;
-
+		
 	// if (isdigit(input[0]))
 	// 	
 	
 	int i = converter.ConvertToInt(input);
-	if (converter.getTypo() == CHAR && myIsprint(i))
-		std::cout << "int: " << i << std::endl;
-	else if (i == -1 && input != "-1")
+
+	if (i == -1 && input != "-1")
 		std::cout << "int: impossible" << std::endl;
-	
 	else
 		std::cout << "int: " << i << std::endl;
 

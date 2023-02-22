@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/21 13:07:49 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/21 22:58:41 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ class ScalarConverter
 		ScalarConverter(const ScalarConverter& src);
 		~ScalarConverter();
 
+	public:
 		char c;
 		int	i;
 		float f;
 		double d;
 		Type _type;
 
-	public:
 		enum Type type;
 		ScalarConverter& operator=(const ScalarConverter& src);
 
