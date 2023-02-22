@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/22 18:50:58 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/22 23:34:05 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,13 +342,13 @@ void ScalarConverter::convert(const std::string& input)
 					std::cout << "int: " << converter.i << std::endl;
 				if ((converter.f == -1 && input != "-1") || converter.overflow_d == true)
 					std::cout << "float: " << "impossible" << std::endl;
-				else if (input.find('.') == std::string::npos || converter.f == 0)
+				else if (input.find('.') != std::string::npos && std::fmod(converter.f, 1.0) == 0.0)
 					std::cout << "float: " << converter.f << ".0f" << std::endl;
 				else
 					std::cout << "float: " << converter.f << "f" << std::endl;
 				if ((converter.d == -1 && input != "-1") || converter.overflow_d == true)
 					std::cout << "double: " << "impossible" << std::endl;
-				else if (input.find('.') == std::string::npos || converter.d == 0)
+				else if (input.find('.') != std::string::npos && std::fmod(converter.f, 1.0) == 0.0)
 					std::cout << "double: " << converter.d << ".0" << std::endl;
 				else
 					std::cout << "double: " << converter.d << std::endl;
@@ -378,13 +378,13 @@ void ScalarConverter::convert(const std::string& input)
 					std::cout << "int: " << converter.i << std::endl;
 				if ((converter.f == -1 && input != "-1") || converter.overflow_d == true)
 					std::cout << "float: " << "impossible" << std::endl;
-				else if (input.find('.') == std::string::npos || converter.f == 0)
+				else if (input.find('.') != std::string::npos && std::fmod(converter.f, 1.0) == 0.0)
 					std::cout << "float: " << converter.f << ".0f" << std::endl;
 				else
 					std::cout << "float: " << converter.f << "f" << std::endl;
 				if ((converter.d == -1 && input != "-1") || converter.overflow_d == true)
 					std::cout << "double: " << "impossible" << std::endl;
-				else if (input.find('.') == std::string::npos || converter.d == 0)
+				else if (input.find('.') != std::string::npos && std::fmod(converter.f, 1.0) == 0.0)
 					std::cout << "double: " << converter.d << ".0" << std::endl;
 				else
 					std::cout << "double: " << converter.d << std::endl;

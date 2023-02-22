@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/22 18:48:43 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/22 23:20:00 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <string>
 # include <limits>
+# include <cmath>
 
 enum Type {INVALID, CHAR, INT, FLOAT, DOUBLE};
 
