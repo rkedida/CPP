@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/22 18:58:57 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/23 10:41:11 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,20 @@
 
 # include "Serialize.hpp"
 
+class Data
+{
+	private:
+
+	public:
+		Data();
+		Data(const Data& src);
+		~Data();
+
+		Data& operator=(const Data& src);
+
+		std::string name;
+		int id;
+		float value;
+};
 
 #endif

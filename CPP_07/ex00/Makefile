@@ -6,15 +6,15 @@
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#              #
-#    Updated: 2023/02/22 21:40:37 by rkedida          ###   ########.fr        #
+#    Updated: 2023/02/23 14:35:38 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= Serialize
+NAME		= Start
 
-SRC			= main.cpp Data.cpp Serialize.cpp
+SRC			= main.cpp
 
-HEADERS		= Data.hpp Serialize.hpp
+HEADERS		= whatever.hpp
 
 OBJ			= $(SRC:.cpp=.o)
 

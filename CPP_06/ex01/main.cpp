@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serialize.hpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/22 21:22:31 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/23 10:43:05 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZE_HPP
-# define SERIALIZE_HPP
+# include "Serialize.hpp"
 
-# include <iostream>
-# include "Data.hpp"
-
-class Data;
-
-class Serialize
+int main()
 {
-	private:
-		Serialize();
-		Serialize(const Serialize& src);
-		~Serialize();
+	Data data;
+	data.name = "Balu";
+	data.id = 42;
+	data.value = 3.14;
 
-	public:
+	uintptr_t raw = Serialize::serialize(&data);
+	Data *ptr = Serialize::deserialize(raw);
+	
+	std::cout << "Name: " << ptr->name << std::endl;
+	std::cout << "Id: " << ptr->id << std::endl;
+	std::cout << "Value: " << ptr->value << std::endl;
 
-		Serialize& operator=(const Serialize& src);
-		static uintptr_t serialize(Data* ptr);
-		static Data* deserialize(uintptr_t raw);
-};
-
-#endif
+	return (0);
+}

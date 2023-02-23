@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serialize.hpp                                      :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/22 21:22:31 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/23 12:41:43 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZE_HPP
-# define SERIALIZE_HPP
+#ifndef C_HPP
+# define C_HPP
 
-# include <iostream>
-# include "Data.hpp"
+# include "Base.hpp"
 
-class Data;
-
-class Serialize
+class C : public Base
 {
-	private:
-		Serialize();
-		Serialize(const Serialize& src);
-		~Serialize();
-
-	public:
-
-		Serialize& operator=(const Serialize& src);
-		static uintptr_t serialize(Data* ptr);
-		static Data* deserialize(uintptr_t raw);
 };
 
 #endif
