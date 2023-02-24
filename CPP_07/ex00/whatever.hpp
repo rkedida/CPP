@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/23 15:21:31 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:58:01 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,24 @@ T const& max(T const& a, T const& b)
 	return a < b ? b : a;
 }
 
-class Awesome
+class Whatever
 {
 	private:
-		int _n;
+		float _i;
 
 	public:
-		Awesome(int n);
-		~Awesome();
-		int getType() const { return this->_n};
-		bool operator==(Awesome const & rhs) const {return (this->_n == rhs._n); }
-		bool operator!=(Awesome const & rhs) const {return (this->_n != rhs._n); }
-		bool operator>(Awesome const & rhs) const {return (this->_n > rhs._n); }
-		bool operator<(Awesome const & rhs) const {return (this->_n < rhs._n); }
-		bool operator>=(Awesome const & rhs) const {return (this->_n >= rhs._n); }
-		bool operator<=(Awesome const & rhs) const {return (this->_n <= rhs._n); }
+		Whatever(float i) : _i(i) {};
 		
+		float getType() const { return this->_i;}
+		bool operator==(Whatever const & rhs) const;
+		bool operator!=(Whatever const & rhs) const;
+		bool operator>(Whatever const & rhs) const;
+		bool operator<(Whatever const & rhs) const;
+		bool operator>=(Whatever const & rhs) const;
+		bool operator<=(Whatever const & rhs) const;
+
 };
 
+std::ostream& operator<<(std::ostream& out, const Whatever& src);
 
 #endif
