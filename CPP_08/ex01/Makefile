@@ -6,11 +6,11 @@
 #    By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#              #
-#    Updated: 2023/02/26 10:16:03 by rkedida          ###   ########.fr        #
+#    Updated: 2023/02/26 17:47:48 by rkedida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= easyfind
+NAME		= Span
 
 SRC			= main.cpp Span.cpp
 

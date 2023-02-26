@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/26 10:53:29 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:51:28 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define SPAN_HPP
 
 # include <iostream>
+# include <algorithm>
 # include <vector>
+# include <random>
 # include <exception>
 
 class Span
@@ -30,9 +32,12 @@ class Span
 		~Span();
 
 		Span& operator=(const Span& src);
-		void addNumbers(unsigned int N);
+
+		void addNumber(unsigned int N);
 		int shortestSpan() const;
 		int longestSpan() const;
 };
+
+// std::ostream& operator<<(const std::ostream& out, const Span& src);
 
 #endif
