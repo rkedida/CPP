@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/26 09:15:07 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/26 14:43:28 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
 
 		try
 		{
-			Array<unsigned int>c = Array<unsigned int>(3);		
+			Array<unsigned int>c = Array<unsigned int>(3);
 			c[1] = 1;
 			std::cout << c[1] << std::endl;
 			std::cout << c[6] << std::endl;
@@ -31,8 +31,8 @@ int main()
 		{
 			std::cerr << "Exception caught: " << e.what() << std::endl;
 		}
-		
-		
+
+
 		std::cout << std::endl;
 		std::cout << a << std::endl;
 		std::cout << &a << std::endl;

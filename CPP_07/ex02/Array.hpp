@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/26 09:11:07 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/26 14:41:37 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ class Array
 			return *this;
 		}
 
-		T& operator[](unsigned int nE)
+		T& operator[](const T& nE)
 		{
 			 if (nE >= this->_nE)
 				throw std::out_of_range("Invalid index");
