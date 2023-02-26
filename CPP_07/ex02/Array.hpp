@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/02/24 21:45:12 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/02/26 09:11:07 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <exception>
+# include <ostream>
 
 template <typename T>
 class Array
@@ -24,56 +25,68 @@ class Array
 		T* data;
 
 	public:
-		Array();
-		Array(unsigned int nE);
-		~Array();
+		Array() : _nE(0), data(new T[0])
+		{
+			std::cout << "Array Default Constructor Called." << std::endl;
+		}
 
-		Array& operator=(const Array& src);
+		Array(unsigned int nE) : _nE(nE), data(new T[nE])
+		{
+			std::cout << "Array Parametic Constructor Called." << std::endl;
+		}
+
+		Array(const Array& src)
+		{
+			std::cout << "Array Copy Constructor Called." << std::endl;
+			*this = src;
+		}
+
+		~Array()
+		{
+			delete [] data;
+			std::cout << "Array Destructor Called." << std::endl;
+		}
+
+		Array& operator=(const Array& src)
+		{
+			std::cout << "Array Copy Assignment Operator Called." << std::endl;
+			if (this != &src)
+			{
+				T* newData = new T[src._nE];
+				for(unsigned int i = 0; i < src.size(); i++)
+					newData[i] = src.data[i];
+		
+				delete [] data;
+				data = newData;
+				this->_nE = src._nE;
+			}
+			return *this;
+		}
+
+		T& operator[](unsigned int nE)
+		{
+			 if (nE >= this->_nE)
+				throw std::out_of_range("Invalid index");
+			return data[nE];
+		}
+
+		T* getData() const {return this->data;}
+		unsigned int size() const 
+		{
+			return this->_nE;
+		}
+
 };
 
 template <typename T>
-Array<T>::Array() : _nE(0), ptrDataElm(0)
+std::ostream& operator<<(std::ostream& out, const Array<T>& src)
 {
-	std::cout << "Array Default Constructor Called." << std::endl;
-}
+	out << "[ ";
+	for (unsigned int i = 0; i < src.size(); i++)
+		out << "'" << src.getData()[i] << "'" << " ";
+	out << "]";
 
-template <typename T>
-Array<T>::Array(unsigned int nE) : _nE(nE)
-{
-	std::cout << "Array Parametic Constructor Called." << std::endl;
-	this->data = new T[nE];
-	for(unsigned int i = 0; i < this->nE; i++)
-		this->data[i] = src.data[i];
-}
-
-template <typename T>
-Array<T>::~Array()
-{
-	std::cout << "Array Default Constructor Called." << std::endl;
-}
-
-template <typename T>
-Array<T>& Array<T>::operator=(const Array& src)
-{
-	std::cout << "Array Copy Assignment Operator Called." << std::endl;
-	if (this != src)
-	{
-		T* newData = new T[src._nE];
-		for(unsigned int i = 0; i < src._nE; i++)
-			newData[i] = src.data[i]
-
-		delete [] data;
-		data = newData;
-		this->_ne = src._nE;
-	}
-}
-
-template <typename T>
-
-
-std::ostream operator<<(std::ostream& out, const Array& src)
-{
-	out << src.
+	return out;
 }
 
 #endif
