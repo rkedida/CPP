@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
+/*   Updated: 2023/05/22 19:38:57 by rkedida          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 
 int main(int argc, char** argv)
 {
 	PmergeMe pmergeme;
 
-	// Read argv and save numbers in list and vector
 	for (int i = 1; i < argc; ++i)
 	{
 		try
 		{
 			char* endptr;
 			double num = std::strtod(argv[i], &endptr);
-			if (*endptr != '\0' || endptr == argv[i]) // If conversion failed
+			if (*endptr != '\0' || endptr == argv[i])
 				throw std::invalid_argument("Invalid argument");
 			if (num < 0)
 				throw std::invalid_argument("Negative number encountered");
@@ -23,35 +34,28 @@ int main(int argc, char** argv)
 			return 1;
 		}
 	}
-
-	// Print unsorted sequence
 	std::cout << "Before: ";
 	pmergeme.printVector();
 
-	// Sort the vector and print time taken
 	clock_t start = clock();
 	pmergeme.mergeInsertVector();
 	clock_t stop = clock();
 	clock_t duration = stop - start;
 
-	// Print sorted sequence
 	std::cout << "After: ";
 	pmergeme.printVector();
 	std::cout << "Time to process a range of "<< argc -1 << " elements with std::vector : " <<std::fixed << std::setprecision(7) << (double)duration / CLOCKS_PER_SEC << "s" << std::endl;
 
-	// Reset vector and list to unsorted state
 	pmergeme.resetVectorList();
-	// Print unsorted sequence
+
 	std::cout << "Before: ";
 	pmergeme.printList();
 
-	// Sort the list and print time taken
 	start = clock();
 	pmergeme.mergeInsertList();
 	stop = clock();
 	duration = stop - start;
 
-	// Print sorted sequence
 	std::cout << "After: ";
 	pmergeme.printList();
 	std::cout << "Time to process a range of "<< argc -1 << " elements with std::list : " <<std::fixed << std::setprecision(7) << (double)duration / CLOCKS_PER_SEC << "s" << std::endl;

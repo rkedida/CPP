@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RPN.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
+/*   Updated: 2023/05/22 19:37:52 by rkedida          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "RPN.hpp"
 
 RPN::RPN()
@@ -7,8 +19,6 @@ RPN::RPN()
 RPN::~RPN()
 {
 }
-
-
 
 double RPN::calculateRPN(const std::string &expr)
 {
@@ -41,7 +51,6 @@ double RPN::calculateRPN(const std::string &expr)
 		}
 		else
 		{
-			// stack.push(std::stod(token));
 			std::istringstream iss2(token);
 			double value;
 			if (iss2 >> value)
@@ -51,7 +60,6 @@ double RPN::calculateRPN(const std::string &expr)
 
 		}
 	}
-
 	if (stack.size() != 1)
 		throw std::runtime_error("Error: too many values in expression");
 
