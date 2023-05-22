@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/05/22 19:39:21 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/05/22 23:09:00 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,20 +148,24 @@ void PmergeMe::timsortList(std::list<int>::iterator begin, std::list<int>::itera
 	for (int i = 0; i < size; i += RUN)
 	{
 		std::list<int>::iterator iter = begin;
-		std::advance(iter, std::min(i + RUN, size));
-		insertionSortList(begin, iter);
+		std::advance(iter, i);
+		std::list<int>::iterator iter_end = begin;
+		std::advance(iter_end, std::min(i + RUN, size));
+		insertionSortList(iter, iter_end);
 	}
 
 	for (int mid = RUN; mid < size; mid = 2 * mid)
 	{
 		for (int start = 0; start < size; start += 2 * mid)
 		{
+			std::list<int>::iterator startIter = begin;
+			std::advance(startIter, start);
 			std::list<int>::iterator midIter = begin;
-			std::list<int>::iterator endIter = begin;
 			std::advance(midIter, std::min(start + mid, size));
+			std::list<int>::iterator endIter = begin;
 			std::advance(endIter, std::min(start + 2 * mid, size));
 
-			mergeList(begin, midIter, endIter);
+			mergeList(startIter, midIter, endIter);
 		}
 	}
 }
@@ -170,39 +174,31 @@ void PmergeMe::insertionSortList(std::list<int>::iterator begin, std::list<int>:
 {
 	for (std::list<int>::iterator i = begin; i != end; ++i)
 	{
-		std::list<int>::iterator insert_point = std::lower_bound(begin, i , *i);
-		std::rotate(insert_point, i, end);
+		std::list<int>::iterator j = i;
+		while (j != begin && *(std::prev(j)) > *j)
+		{
+			std::iter_swap(j, std::prev(j));
+			--j;
+		}
 	}
 }
 
 void PmergeMe::mergeList(std::list<int>::iterator begin, std::list<int>::iterator mid, std::list<int>::iterator end)
 {
-	std::list<int> leftList(begin, mid);
-	std::list<int> rightList(mid, end);
+	std::list<int>::iterator i = begin;
+	std::list<int>::iterator j = mid;
 
-	std::list<int>::iterator it = begin;
-	while (!leftList.empty() && !rightList.empty())
+	while (i != mid && j != end)
 	{
-		if (leftList.front() <= rightList.front())
-		{
-			*it++ = leftList.front();
-			leftList.pop_front();
-		}
+		if (*i <= *j)
+			++i;
 		else
 		{
-			*it++ = rightList.front();
-			rightList.pop_front();
+			std::rotate(i, j, std::next(j));
+			++i;
+			++mid;
+			++j;
 		}
-	}
-	while (!leftList.empty())
-	{
-		*it++ = leftList.front();
-		leftList.pop_front();
-	}
-	while (!rightList.empty())
-	{
-		*it++ = rightList.front();
-		rightList.pop_front();
 	}
 }
 
