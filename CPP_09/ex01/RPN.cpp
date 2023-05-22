@@ -40,7 +40,16 @@ double RPN::calculateRPN(const std::string &expr)
 			}
 		}
 		else
-			stack.push(std::stod(token));
+		{
+			// stack.push(std::stod(token));
+			std::istringstream iss2(token);
+			double value;
+			if (iss2 >> value)
+				stack.push(value);
+			else
+				std::cerr << "Error: token couldn't converted." << std::endl;
+
+		}
 	}
 
 	if (stack.size() != 1)

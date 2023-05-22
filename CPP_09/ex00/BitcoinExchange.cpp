@@ -10,7 +10,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) : _btcData(src._btc
 
 BitcoinExchange::BitcoinExchange(const std::string& file)
 {
-	std::ifstream inFile(file);
+	std::ifstream inFile(file.c_str());
 	std::string line, date;
 	double price;
 
@@ -42,7 +42,7 @@ BitcoinExchange::~BitcoinExchange()
 
 void BitcoinExchange::processInput(const std::string& filename)
 {
-	std::ifstream inFile(filename);
+	std::ifstream inFile(filename.c_str());
 	std::string line, date;
 	double value;
 
@@ -61,7 +61,6 @@ void BitcoinExchange::processInput(const std::string& filename)
 			std::cout << "Error: bad input => " << line << std::endl;
 			continue;
 		}
-		
 		if (value < 0)
 		{
 			std::cerr << "Error: not a positive number." << std::endl;
@@ -72,7 +71,6 @@ void BitcoinExchange::processInput(const std::string& filename)
 			std::cerr << "Error: too large a number." << std::endl;
 			continue;
 		}
-		
 		std::map<std::string, double>::iterator it = _btcData.upper_bound(date);
 		if (it == _btcData.begin() && it->first != date)
 		{
@@ -84,13 +82,6 @@ void BitcoinExchange::processInput(const std::string& filename)
 				--it;
 			std::cout << date << " => " << value << " = " << it->second * value << std::endl;
 		}
-		
-		if (it->first > date)
-		{
-			std::cerr << "Error: date not found." << std::endl;
-			continue;
-		}
 	}
-
 	inFile.close();
 }

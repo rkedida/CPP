@@ -1,8 +1,7 @@
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe()
-{
-}
+{}
 
 PmergeMe::PmergeMe(const PmergeMe& src) : _v(src._v), _l(src._l)
 {}
@@ -27,43 +26,6 @@ void	PmergeMe::addNumber(double num)
 	this->_l.push_back(num);
 	this->_lInital.push_back(num);
 }
-
-void	PmergeMe::mergeInsertVector()
-{
-	for (std::size_t i = 1; i < _v.size(); ++i)
-	{
-		int key = _v[i];
-		std::size_t j = i;
-		while (j > 0 && _v[j - 1] > key) {
-			_v[j] = _v[j - 1];
-			--j;
-		}
-		_v[j] = key;
-	}
-}
-
-void	PmergeMe::mergeInsertList()
-{
-	if (_l.size() <= 1)
-		return; // Already sorted
-
-	std::list<int>::iterator it = _l.begin();
-	++it; // Start from the second element
-	for (; it != _l.end(); ++it)
-	{
-		int key = *it;
-		std::list<int>::iterator it2 = it;
-		--it2; // Start comparing with the previous element
-		while (it2 != _l.begin() && *it2 > key)
-		{
-			std::swap(*it2, *(std::next(it2)));
-			--it2;
-		}
-		if (*it2 > key)
-			std::swap(*it2, *(std::next(it2)));
-	}
-}
-
 
 void PmergeMe::printVector() const
 {
@@ -94,5 +56,141 @@ void	PmergeMe::resetVectorList()
 {
 	this->_v = this->_vInital;
 	this->_l = this->_lInital;
+}
+
+void	PmergeMe::mergeInsertVector()
+{
+	timsortVector(_v.begin(), _v.end());
+}
+
+void PmergeMe::timsortVector(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	const int RUN = 32;
+	int size = std::distance(begin, end);
+
+	for (int i = 0; i < size; i += RUN)
+		insertionSortVector(begin + i, std::min(begin + (i + RUN), end));
+
+	for (int mid = RUN; mid < size; mid = 2 * mid)
+	{
+		for (int start = 0; start < size; start += 2 * mid)
+		{
+			std::vector<int>::iterator midIter = begin + std::min(start + mid, size);
+			std::vector<int>::iterator endIter = begin + std::min(start + 2 * mid, size);
+			mergeVector(begin + start, midIter, endIter);
+		}
+	}
+}
+
+void PmergeMe::insertionSortVector(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	for (std::vector<int>::iterator i = begin; i != end; ++i)
+	{
+		int key = *i;
+		std::vector<int>::iterator j = i;
+		while (j > begin && *(j - 1) > key)
+		{
+			*j = *(j - 1);
+			--j;
+		}
+		*j = key;
+	}
+}
+
+void PmergeMe::mergeVector(std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end)
+{
+	std::vector<int> leftArray(mid - begin);
+	std::vector<int> rightArray(end - mid);
+
+	std::copy(begin, mid, leftArray.begin());
+	std::copy(mid, end, rightArray.begin());
+
+	std::vector<int>::iterator leftIter = leftArray.begin();
+	std::vector<int>::iterator rightIter = rightArray.begin();
+
+	for (std::vector<int>::iterator iter = begin; iter != end; ++iter)
+	{
+		if (leftIter != leftArray.end() && (rightIter == rightArray.end() || *leftIter <= *rightIter))
+		{
+			*iter = *leftIter;
+			++leftIter;
+		}
+		else
+		{
+			*iter = *rightIter;
+			++rightIter;
+		}
+	}
+}
+
+void	PmergeMe::mergeInsertList()
+{
+	timsortList(_l.begin(), _l.end());
+}
+
+void PmergeMe::timsortList(std::list<int>::iterator begin, std::list<int>::iterator end)
+{
+	const int RUN = 32;
+	int size = std::distance(begin, end);
+
+	for (int i = 0; i < size; i += RUN)
+	{
+		std::list<int>::iterator iter = begin;
+		std::advance(iter, std::min(i + RUN, size));
+		insertionSortList(begin, iter);
+	}
+
+	for (int mid = RUN; mid < size; mid = 2 * mid)
+	{
+		for (int start = 0; start < size; start += 2 * mid)
+		{
+			std::list<int>::iterator midIter = begin;
+			std::list<int>::iterator endIter = begin;
+			std::advance(midIter, std::min(start + mid, size));
+			std::advance(endIter, std::min(start + 2 * mid, size));
+
+			mergeList(begin, midIter, endIter);
+		}
+	}
+}
+
+void PmergeMe::insertionSortList(std::list<int>::iterator begin, std::list<int>::iterator end)
+{
+	for (std::list<int>::iterator i = begin; i != end; ++i)
+	{
+		std::list<int>::iterator insert_point = std::lower_bound(begin, i , *i);
+		std::rotate(insert_point, i, end);
+	}
+}
+
+void PmergeMe::mergeList(std::list<int>::iterator begin, std::list<int>::iterator mid, std::list<int>::iterator end)
+{
+	std::list<int> leftList(begin, mid);
+	std::list<int> rightList(mid, end);
+
+	std::list<int>::iterator it = begin;
+	while (!leftList.empty() && !rightList.empty())
+	{
+		if (leftList.front() <= rightList.front())
+		{
+			*it++ = leftList.front();
+			leftList.pop_front();
+		}
+		else
+		{
+			*it++ = rightList.front();
+			rightList.pop_front();
+		}
+	}
+	while (!leftList.empty())
+	{
+		*it++ = leftList.front();
+		leftList.pop_front();
+	}
+	while (!rightList.empty())
+	{
+		*it++ = rightList.front();
+		rightList.pop_front();
+	}
 }
 

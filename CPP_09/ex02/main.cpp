@@ -9,14 +9,17 @@ int main(int argc, char** argv)
 	{
 		try
 		{
-			double num = std::stod(argv[i]);
+			char* endptr;
+			double num = std::strtod(argv[i], &endptr);
+			if (*endptr != '\0' || endptr == argv[i]) // If conversion failed
+				throw std::invalid_argument("Invalid argument");
 			if (num < 0)
 				throw std::invalid_argument("Negative number encountered");
 			pmergeme.addNumber(num);
 		}
 		catch (std::invalid_argument& e)
 		{
-			std::cerr << "Error\n";
+			std::cerr << "Error: " << e.what() << '\n';
 			return 1;
 		}
 	}
