@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/05/22 23:09:00 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/05/24 20:51:23 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ PmergeMe::~PmergeMe()
 void	PmergeMe::addNumber(double num)
 {
 	this->_v.push_back(num);
-	this->_vInital.push_back(num);
 	this->_l.push_back(num);
-	this->_lInital.push_back(num);
 }
 
 void PmergeMe::printVector() const
@@ -58,16 +56,9 @@ void PmergeMe::printList() const
 		std::cout << *it;
 		++it;
 	}
-	
 	for (; it != _l.end(); ++it)
 		std::cout << " " << *it;
 	std::cout << "\n";
-}
-
-void	PmergeMe::resetVectorList()
-{
-	this->_v = this->_vInital;
-	this->_l = this->_lInital;
 }
 
 void	PmergeMe::mergeInsertVector()
@@ -82,7 +73,6 @@ void PmergeMe::timsortVector(std::vector<int>::iterator begin, std::vector<int>:
 
 	for (int i = 0; i < size; i += RUN)
 		insertionSortVector(begin + i, std::min(begin + (i + RUN), end));
-
 	for (int mid = RUN; mid < size; mid = 2 * mid)
 	{
 		for (int start = 0; start < size; start += 2 * mid)
@@ -111,29 +101,25 @@ void PmergeMe::insertionSortVector(std::vector<int>::iterator begin, std::vector
 
 void PmergeMe::mergeVector(std::vector<int>::iterator begin, std::vector<int>::iterator mid, std::vector<int>::iterator end)
 {
-	std::vector<int> leftArray(mid - begin);
-	std::vector<int> rightArray(end - mid);
+	std::vector<int>::iterator leftIter = begin;
+	std::vector<int>::iterator rightIter = mid;
 
-	std::copy(begin, mid, leftArray.begin());
-	std::copy(mid, end, rightArray.begin());
-
-	std::vector<int>::iterator leftIter = leftArray.begin();
-	std::vector<int>::iterator rightIter = rightArray.begin();
-
-	for (std::vector<int>::iterator iter = begin; iter != end; ++iter)
+	while (leftIter != mid && rightIter != end)
 	{
-		if (leftIter != leftArray.end() && (rightIter == rightArray.end() || *leftIter <= *rightIter))
-		{
-			*iter = *leftIter;
+		if (*leftIter <= *rightIter)
 			++leftIter;
-		}
 		else
 		{
-			*iter = *rightIter;
+			std::vector<int>::iterator nextRightIter = rightIter;
+			++nextRightIter;
+			std::rotate(leftIter, rightIter, nextRightIter);
+			++leftIter;
+			++mid;
 			++rightIter;
 		}
 	}
 }
+
 
 void	PmergeMe::mergeInsertList()
 {
@@ -153,7 +139,6 @@ void PmergeMe::timsortList(std::list<int>::iterator begin, std::list<int>::itera
 		std::advance(iter_end, std::min(i + RUN, size));
 		insertionSortList(iter, iter_end);
 	}
-
 	for (int mid = RUN; mid < size; mid = 2 * mid)
 	{
 		for (int start = 0; start < size; start += 2 * mid)
@@ -164,7 +149,6 @@ void PmergeMe::timsortList(std::list<int>::iterator begin, std::list<int>::itera
 			std::advance(midIter, std::min(start + mid, size));
 			std::list<int>::iterator endIter = begin;
 			std::advance(endIter, std::min(start + 2 * mid, size));
-
 			mergeList(startIter, midIter, endIter);
 		}
 	}
@@ -175,10 +159,17 @@ void PmergeMe::insertionSortList(std::list<int>::iterator begin, std::list<int>:
 	for (std::list<int>::iterator i = begin; i != end; ++i)
 	{
 		std::list<int>::iterator j = i;
-		while (j != begin && *(std::prev(j)) > *j)
+		while (j != begin)
 		{
-			std::iter_swap(j, std::prev(j));
-			--j;
+			std::list<int>::iterator prevJ = j;
+			--prevJ;
+			if (*prevJ > *j)
+			{
+				std::iter_swap(j, prevJ);
+				--j;
+			}
+			else
+				break;
 		}
 	}
 }
@@ -194,7 +185,9 @@ void PmergeMe::mergeList(std::list<int>::iterator begin, std::list<int>::iterato
 			++i;
 		else
 		{
-			std::rotate(i, j, std::next(j));
+			std::list<int>::iterator nextJ = j;
+			++nextJ;
+			std::rotate(i, j, nextJ);
 			++i;
 			++mid;
 			++j;
@@ -202,3 +195,9 @@ void PmergeMe::mergeList(std::list<int>::iterator begin, std::list<int>::iterato
 	}
 }
 
+bool	PmergeMe::check_check()
+{
+	if (!this->sorted(this->_v) || !this->sorted(this->_l))
+		return false;
+	return true;
+}

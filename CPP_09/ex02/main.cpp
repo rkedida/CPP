@@ -6,7 +6,7 @@
 /*   By: rkedida <rkedida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:14:58 by rkedida           #+#    #+#             */
-/*   Updated: 2023/05/22 19:38:57 by rkedida          ###   ########.fr       */
+/*   Updated: 2023/05/24 20:47:44 by rkedida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int main(int argc, char** argv)
 
 	std::cout << "After: ";
 	pmergeme.printVector();
-	std::cout << "Time to process a range of "<< argc -1 << " elements with std::vector : " <<std::fixed << std::setprecision(7) << (double)duration / CLOCKS_PER_SEC << "s" << std::endl;
-
-	pmergeme.resetVectorList();
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << std::fixed << std::setprecision(7) << (double)duration / CLOCKS_PER_SEC << "s" << std::endl;
 
 	std::cout << "Before: ";
 	pmergeme.printList();
@@ -58,6 +56,8 @@ int main(int argc, char** argv)
 
 	std::cout << "After: ";
 	pmergeme.printList();
-	std::cout << "Time to process a range of "<< argc -1 << " elements with std::list : " <<std::fixed << std::setprecision(7) << (double)duration / CLOCKS_PER_SEC << "s" << std::endl;
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::list : " << std::fixed << std::setprecision(7) << (double)duration / CLOCKS_PER_SEC << "s" << std::endl;
+
+	pmergeme.check_check();
 	return 0;
 }
